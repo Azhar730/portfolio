@@ -37,10 +37,11 @@ Welcome to my personal portfolio website! This is a fully responsive, animated, 
 Installation & Setup
 Clone the project and install dependencies:
 
-git clone https://github.com/your-username/your-portfolio.git
+git clone https://github.com/Azhar730/portfolio.git
 cd portfolio
 npm install
-Run locally:
+rename .env.local.example to .env.local
+npm run dev
 
 
 
@@ -52,7 +53,7 @@ Feel free to reach out!
 
 Email: azharmahmud730@gmail.com
 
-GitHub: Azhar730
+Portfolio: https://azharmahmud.vercel.app
 
 LinkedIn: https://www.linkedin.com/in/azhar-mahmud-437306267
 
