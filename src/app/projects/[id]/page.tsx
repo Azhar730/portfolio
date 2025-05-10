@@ -17,7 +17,7 @@ const projectThemeGradients: Record<string, { live: string; github: string }> =
       live: "from-green-500 to-emerald-600",
       github: "from-gray-800 to-gray-600",
     },
-    "medimart": {
+    medimart: {
       live: "from-pink-500 to-rose-500",
       github: "from-gray-800 to-gray-600",
     },
@@ -47,16 +47,16 @@ const ProjectDetails = () => {
 
   return (
     <section className="relative bg-gradient-to-br from-sky-100 via-white to-sky-200 py-20 px-6 min-h-screen">
-      {/* Decorative Background */}
+      {/* Background Blur Circles */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-indigo-300 opacity-20 rounded-full blur-3xl -z-10 animate-pulse" />
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-purple-300 opacity-20 rounded-full blur-3xl -z-10 animate-pulse" />
 
-      <div className="max-w-4xl mx-auto bg-gradient-to-br from-indigo-100 via-blue-100 to-purple-100 rounded-2xl p-8 shadow-xl hover:scale-[1.01] transition-transform">
-        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-500 to-purple-600 mb-6">
+      <div className="max-w-4xl mx-auto bg-white bg-opacity-90 rounded-2xl p-8 shadow-xl hover:scale-[1.01] transition-transform space-y-6">
+        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-500 to-purple-600">
           {project.title}
         </h1>
 
-        {/* Swiper Slider */}
+        {/* Swiper Images */}
         <Swiper
           modules={[Pagination, Navigation, Autoplay]}
           pagination={{ clickable: true }}
@@ -64,7 +64,7 @@ const ProjectDetails = () => {
           autoplay={{ delay: 4000, disableOnInteraction: false }}
           spaceBetween={10}
           slidesPerView={1}
-          className="w-full h-full rounded-xl mb-6"
+          className="rounded-xl"
         >
           {(Array.isArray(project.image) ? project.image : [project.image]).map(
             (img, i) => (
@@ -74,7 +74,7 @@ const ProjectDetails = () => {
                   alt={`${project.title}-${i + 1}`}
                   width={800}
                   height={400}
-                  className="w-full h-full object-cover rounded-xl"
+                  className="w-full h-auto object-cover rounded-xl"
                   unoptimized
                 />
               </SwiperSlide>
@@ -82,36 +82,85 @@ const ProjectDetails = () => {
           )}
         </Swiper>
 
-        <article className="text-gray-800 space-y-5 leading-relaxed text-lg">
-          <p>{project.details}</p>
-          <ul className="list-disc ml-6 space-y-1">
-            {project.tech.map((tech, index) => (
-              <li key={index}>{tech}</li>
+        {/* Overview */}
+        <div>
+          <h2 className="text-2xl font-bold text-indigo-600 mb-2">Overview</h2>
+          <p className="text-gray-800">{project.overview}</p>
+        </div>
+
+        {/* Core Features */}
+        <div>
+          <h2 className="text-2xl font-bold text-indigo-600 mb-2">
+            Core Features
+          </h2>
+          <ul className="list-disc ml-6 text-gray-800 space-y-1">
+            {project.features?.map((feature, index) => (
+              <li key={index}>{feature}</li>
             ))}
           </ul>
-        </article>
+        </div>
 
+        {/* Tech Stack */}
+        <div>
+          <h2 className="text-2xl font-bold text-indigo-600 mb-2">
+            Tech Stack
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map((tech, i) => (
+              <span
+                key={i}
+                className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Challenges */}
+        <div>
+          <h2 className="text-2xl font-bold text-indigo-600 mb-2">
+            Major Challenges
+          </h2>
+          <ul className="list-disc ml-6 text-gray-800 space-y-1">
+            {project.challenges?.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Future Plans */}
+        <div>
+          <h2 className="text-2xl font-bold text-indigo-600 mb-2">
+            Future Plans
+          </h2>
+          <ul className="list-disc ml-6 text-gray-800 space-y-1">
+            {project.futurePlans?.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Links */}
         <div className="flex flex-wrap gap-4 mt-8">
-          {project.live && project.live !== "#" && (
+          {project.live && (
             <a
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center gap-2 text-sm px-4 py-1.5 bg-gradient-to-r ${gradients.live} text-white rounded-full font-medium hover:opacity-90 transition`}
+              className={`flex items-center gap-2 text-sm px-4 py-2 bg-gradient-to-r ${gradients.live} text-white rounded-full font-medium hover:opacity-90 transition`}
             >
-              <FaExternalLinkAlt />
-              Live Demo
+              <FaExternalLinkAlt /> Live Demo
             </a>
           )}
-          {project.github && project.github !== "#" && (
+          {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center gap-2 text-sm px-4 py-1.5 bg-gradient-to-r ${gradients.github} text-white rounded-full font-medium hover:opacity-90 transition`}
+              className={`flex items-center gap-2 text-sm px-4 py-2 bg-gradient-to-r ${gradients.github} text-white rounded-full font-medium hover:opacity-90 transition`}
             >
-              <FaGithub />
-              GitHub
+              <FaGithub /> GitHub
             </a>
           )}
         </div>
